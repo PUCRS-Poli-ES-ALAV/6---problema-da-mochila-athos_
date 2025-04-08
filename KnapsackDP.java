@@ -40,34 +40,4 @@ public class KnapsackDP {
         
         System.out.println("+-------------+------------+--------------+-----------------+");
     }
-
-    public static int editDistanceDP(String s1, String s2) {
-        int m = s1.length();
-        int n = s2.length();
-        int[][] dp = new int[m + 1][n + 1];
-        int iterations = 0;
-        
-        for (int i = 0; i <= m; i++) dp[i][0] = i;
-        for (int j = 0; j <= n; j++) dp[0][j] = j;
-        
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                iterations++;
-                int cost = (s1.charAt(i - 1) == s2.charAt(j - 1)) ? 0 : 1;
-                dp[i][j] = Math.min(Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1), dp[i - 1][j - 1] + cost);
-            }
-        }
-        
-        System.out.printf("Distância de edição: %d, Iterações: %d\n", dp[m][n], iterations);
-        return dp[m][n];
-    }
-    
-    public static void testarEditDistance() {
-        System.out.println("\n+----------------+----------------+-----------------+");
-        System.out.println("| String 1      | String 2       | Distância        |");
-        System.out.println("+----------------+----------------+-----------------+");
-        editDistanceDP("Casablanca", "Portentoso");
-        editDistanceDP("Maven, a Yiddish word...", "This post is not about...");
-        System.out.println("+----------------+----------------+-----------------+");
-    }
 }
